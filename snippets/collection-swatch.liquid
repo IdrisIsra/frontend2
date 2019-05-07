@@ -1,3 +1,4 @@
+
 {% if settings.collection_swatches %}
   {% assign file_extension = 'png' %}
 
@@ -23,7 +24,7 @@
                     {% else %}
                       data-image="{{ variant.featured_image | product_img_url: '400x' }}"
                     {% endif %}
-                    style="background-image: url({{ value | handle | append: '.' | append: file_extension | asset_img_url: '50x' | prepend: 'https:' }}); background-color: {{ value | split: ' ' | last | handle }};">
+                    style="background-image: url({{ variant.image | img_url: 'small' }}); background-color: {{ value | split: ' ' | last | handle }};">
                 </span>
             </a>
           {% endunless %}

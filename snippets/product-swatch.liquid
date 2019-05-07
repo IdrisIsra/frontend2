@@ -36,7 +36,7 @@
           <div class="tooltip">{{ value }}</div>
         {% endif %}
         {% if is_color %}
-          <label for="swatch-{{ option_index }}-{{ value | handle }}-{{ product.id }}{% if section.id %}-{{ section.id }}{% endif %}" style="background-image: url({{ value | handle | append: '.' | append: file_extension | asset_img_url: '50x' | prepend: 'https:' }}); background-color: {{ value | split: ' ' | last | handle }};">
+          <label for="swatch-{{ option_index }}-{{ value | handle }}-{{ product.id }}{% if section.id %}-{{ section.id }}{% endif %}" style="background-image: url({{ variant.image | img_url: 'small' }}); background-color: {{ value | split: ' ' | last | handle }};">
             <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}"/>
           </label>
         {% else %}

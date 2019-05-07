@@ -92,8 +92,8 @@
               <div class="sale_banner_product">{{ 'collections.general.sale' | t }}</div>
             {% endif %}
           {% endif %}
-          {% if collection_handles contains 'new' %}
-            <div class="new_banner_product">{{ 'collections.general.new' | t }}</div>
+          {% if product.tags contains 'yeni' %}
+          <div class="new_banner" style="position: static; margin: 10px 0;"></div>
           {% endif %}
           {% if collection_handles contains 'pre-order' %}
             <div class="preorder_banner_product">{{ 'collections.general.pre_order' | t }}</div>

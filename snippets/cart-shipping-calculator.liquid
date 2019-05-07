@@ -18,7 +18,7 @@
       <input type="text" id="address_zip" name="address[zip]"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %} />
     </div>
     <div class="four columns omega" id="get-rates-container">
-      <label for="get-rates-submit">&nbsp;</label>
+      <label for="get-rates-submit"> </label>
       <input type="button" class="get-rates action_button continue-button" value="{{ 'cart.shipping_calculator.submit_button_label' | t }}" />
     </div>
   </div>

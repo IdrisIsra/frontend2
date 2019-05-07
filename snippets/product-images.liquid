@@ -11,6 +11,13 @@
             gallery-arrows--{{section.settings.gallery_arrows}}
             {% if section.settings.product_thumbs %} {{ section.settings.thumbnail_position }} {% endif %}
             ">
+  
+  {% assign product_heart_tags = product.tags | join: ' ' %}
+  {% for tag in product.tags %}
+  {% if tag contains 'love' %}
+  <div class="product-love-badge"></div>
+  {% endif %}
+  {% endfor %}
   <div class="product_gallery js-product-gallery product-{{ product.id }}-gallery
               {% if product.images.size > 1 %} multi-image {% endif %}
               {% if product.images.size <= 1 %} single-image {% endif %}

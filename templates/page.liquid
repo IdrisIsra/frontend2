@@ -7,6 +7,6 @@
   <div class="feature_divider"></div>
 
   <div>
-    {% include 'page-multi-column', content: page.content %}
+    {% capture pmc_content %}{{ page.content }}{% endcapture %}{% include 'page-multi-column', content: pmc_content %}
   </div>
 </div>

@@ -40,6 +40,12 @@
       {% assign feature_image = product.featured_image %}
       <div class="gallery-cell thumbnail visible-{{ visible_products }}">
         <div class="product-wrap">
+          {% assign product_heart_tags = product.tags | join: ' ' %}
+          {% for tag in product.tags %}
+          {% if tag contains 'love' %}
+          <div class="product-love-badge"></div>
+          {% endif %}
+          {% endfor %}
           <div class="relative product_image swap-{{ settings.collection_secondary_image }}">
             <a href="{{ product.url | within: collection }}" itemprop="url">
               <div class="image__container">

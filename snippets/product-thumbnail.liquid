@@ -29,10 +29,30 @@
   {% endif %}
 
   <div class="product-wrap">
+    {% assign product_heart_tags = product.tags | join: ' ' %}
+    {% for tag in product.tags %}
+    {% if tag contains 'love' %}
+    <div class="product-love-badge"></div>
+    {% endif %}
+    {% endfor %}
     <div class="relative product_image swap-{{ settings.collection_secondary_image }}">
       <a href="{{ product.url | within: collection }}" itemprop="url">
         <div class="image__container">
           {% include 'image-element', image: product.featured_image, alt: alt_text, object_fit: settings.align_height, max_height: section.settings.collection_height %}
+          {% for tag in product.tags %}
+          {% if tag contains '3al2ode' %}
+          <div class="campaign-badge"></div>
+          {% endif %}
+          {% if tag contains 'kampanya2' %}
+          <div class="campaign-badge2"></div>
+          {% endif %}
+          {% if tag contains 'kampanya3' %}
+          <div class="campaign-badge3"></div>
+          {% endif %}          
+          {% if tag contains 'Editorunsecimi' %}
+          <div class="choose-of-editor-badge"></div>
+          {% endif %}
+          {% endfor %}
         </div>
           {% if settings.collection_secondary_image != blank %}
             <div class="image__container">
@@ -49,5 +69,5 @@
       {% include "product-info" %}
     </a>
   </div>
-  {% include 'collection-swatch' %}
+  {% comment %} {% include 'collection-swatch' %} {% endcomment %}
 </div>

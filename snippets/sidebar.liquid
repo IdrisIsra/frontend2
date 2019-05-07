@@ -162,14 +162,14 @@
             {% assign initial_filter_tags = block.settings.filter_tags | split: ',' %}
             {% assign filter_name = block.settings.filter_name | replace: ' ', '_' | downcase | append: '__' %}
 
-            {% capture filter_tags %}{% for filter_tag in initial_filter_tags %}{{- filter_name | strip }}{{ filter_tag | strip -}}{% if forloop.last == false %}^{% endif %}{% endfor %}{% endcapture %}
+            {% capture filter_tags %}{% for filter_tag in initial_filter_tags %}{{ filter_name | strip }}{{ filter_tag | strip }}{% if forloop.last == false %}^{% endif %}{% endfor %}{% endcapture %}
             {% assign filter_tags = filter_tags | split: "^" %}
 
             {%- capture headlines -%}
               {%- for collection_tag in collection.all_tags -%}
                 {%- for tag in filter_tags -%}
-                  {%- capture formatted_tag -%}{{- tag | replace: filter_name, '' | downcase -}}{%- endcapture -%}
-                  {%- capture formatted_collection_tag -%}{{- collection_tag | downcase -}}{%- endcapture -%}
+                  {%- capture formatted_tag -%}{{ tag | replace: filter_name, '' | downcase }}{%- endcapture -%}
+                  {%- capture formatted_collection_tag -%}{{ collection_tag | downcase }}{%- endcapture -%}
                   {%- if formatted_tag == formatted_collection_tag -%}
                     {{ block.settings.filter_name }}{% if forloop.last == false %}^{% endif %}
                   {%- endif -%}
@@ -190,20 +190,20 @@
                     <div class="filter-all-tags color-filter--{{ block.settings.enable_filter_swatches }}">
                       {% for tag in filter_tags %}
                         {% for collection_tag in collection.all_tags %}
-                          {% capture formatted_tag %}{{- tag | replace: filter_name, '' | downcase -}}{% endcapture %}
+                          {% capture formatted_tag %}{{ tag | replace: filter_name, '' | downcase }}{% endcapture %}
                           {% capture formatted_collection_tag %}{{ collection_tag | downcase }}{% endcapture %}
 
                           {% if formatted_tag == formatted_collection_tag %}
                             {% if block.settings.enable_filter_swatches %}
                               <li>
-                                <label data-option-filter><input type="checkbox" value="{{- tag | replace: filter_name, '' | handleize -}}" name="{{tag | handleize }}" id="{{tag}}" class="styled-checkbox" style="background-image: url({{ tag | replace: filter_name, ''| handleize | downcase | append: '.png' | asset_img_url: '50x' }}); background-color: {{tag | replace: filter_name, '' | downcase }}">
+                                <label data-option-filter><input type="checkbox" value="{{ tag | replace: filter_name, '' | handleize }}" name="{{tag | handleize }}" id="{{tag}}" class="styled-checkbox" style="background-image: url({{ tag | replace: filter_name, ''| handleize | downcase | append: '.png' | asset_img_url: '50x' }}); background-color: {{tag | replace: filter_name, '' | downcase }}">
                                     {{tag | replace: filter_name, '' | replace: '_', ' ' }}
                                 </label>
                               </li>
                             {% else %}
                               <li>
                                 <a>
-                                  <label data-option-filter><input type="checkbox" value="{{- tag | replace: filter_name, '' | handleize -}}" name="{{tag | handleize }}" >
+                                  <label data-option-filter><input type="checkbox" value="{{ tag | replace: filter_name, '' | handleize }}" name="{{tag | handleize }}" >
                                     {{tag | replace: filter_name, '' | replace: '_', ' ' }}
                                   </label>
                                 </a>
@@ -216,20 +216,20 @@
                     <div class="filter-active-tag color-filter--{{ block.settings.enable_filter_swatches }}">
                       {% for tag in filter_tags %}
                         {% for current_tag in current_tags %}
-                          {% capture formatted_tag %}{{- tag | replace: filter_name, '' | downcase | handleize -}}{% endcapture %}
+                          {% capture formatted_tag %}{{ tag | replace: filter_name, '' | downcase | handleize }}{% endcapture %}
                           {% capture formatted_current_tag %}{{ current_tag | downcase | handleize }}{% endcapture %}
                           {% if formatted_tag == formatted_current_tag %}
                             {% if block.settings.enable_filter_swatches %}
                               <li>
                                 <label data-option-filter>
-                                  <input checked type="checkbox" value="{{- tag | replace: filter_name, '' | handleize -}}" name="{{tag | handleize }}" id="{{tag}}" class="styled-checkbox" style="background-image: url({{ tag | replace: filter_name, '' | handleize | downcase | append: '.png' | asset_img_url: '50x' }}); background-color: {{tag | replace: filter_name, '' | downcase }}">
+                                  <input checked type="checkbox" value="{{ tag | replace: filter_name, '' | handleize }}" name="{{tag | handleize }}" id="{{tag}}" class="styled-checkbox" style="background-image: url({{ tag | replace: filter_name, '' | handleize | downcase | append: '.png' | asset_img_url: '50x' }}); background-color: {{tag | replace: filter_name, '' | downcase }}">
                                   {{tag | replace: filter_name, '' | replace: '_', ' ' }}
                                 </label>
                               </li>
                             {% else %}
                               <li>
                                 <a class="active">
-                                  <label data-option-filter><input checked type="checkbox" value="{{- tag | replace: filter_name, '' | handleize -}}" name="{{tag}}" >
+                                  <label data-option-filter><input checked type="checkbox" value="{{ tag | replace: filter_name, '' | handleize }}" name="{{tag}}" >
                                     {{tag | replace: filter_name, '' | replace: '_', ' ' }}
                                   </label>
                                 </a>

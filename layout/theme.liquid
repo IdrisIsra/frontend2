@@ -2,6 +2,25 @@
 <!DOCTYPE html>
 <html lang="{{ shop.locale }}">
   <head>
+    {% include 'geolizr-init' %}
+    {% include 'limespot' %}
+    
+    <link rel="alternate" hreflang="tr" href="{{ canonical_url | replace: shop.domain, 'toucheprive.com' }}" />
+    <link rel="alternate" hreflang="en" href="{{ canonical_url | replace: shop.domain, 'eu.toucheprive.com' }}" />
+    <link rel="alternate" hreflang="en-US" href="{{ canonical_url | replace: shop.domain, 'int.toucheprive.com' }}" />
+    <link rel="alternate" hreflang="fr" href="{{ canonical_url | replace: shop.domain, 'eu.toucheprive.com' }}" />
+    <link rel="alternate" hreflang="de" href="{{ canonical_url | replace: shop.domain, 'eu.toucheprive.com' }}" />
+    <link rel="alternate" hreflang="ar" href="{{ canonical_url | replace: shop.domain, 'ar.toucheprive.com' }}" />
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url | replace: shop.domain, 'toucheprive.com' }}" />
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                                                          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                                })(window,document,'script','dataLayer','GTM-PLZBD6B');</script>
+    <!-- End Google Tag Manager -->
+    
     <meta charset="utf-8">
     <meta http-equiv="cleartype" content="on">
     <meta name="robots" content="index,follow">
@@ -63,7 +82,7 @@
     {% else %}
       <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
     {% endif %}
-    <link rel="canonical" href="{{ canonical_url }}" />
+    <link rel="canonical" href="{{ canonical_url }}" id="canonical_selector" />
 
     {% if template contains 'customer' %}
       {{ "shopify_common.js" | shopify_asset_url | script_tag }}
@@ -74,6 +93,14 @@
     {% include 'social-meta-info' %}
     {% if collection.previous_product %}<link rel="prev" href="{{ collection.previous_product }}">{% endif %}
     {% if collection.next_product %}<link rel="next" href="{{ collection.next_product }}">{% endif %}
+    
+    
+    <!-- REAMAZE INTEGRATION START - DO NOT REMOVE -->
+    {% include 'reamaze-config' %}
+    {% include 'reamaze-sso' %}
+    <!-- REAMAZE INTEGRATION END - DO NOT REMOVE -->
+
+    
   </head>
 
   {% if template contains "index" %}
@@ -155,6 +182,7 @@
     {% endunless %}
 
       {{ content_for_layout }}
+        <limespot></limespot>
     </div>
 
     {% unless template contains 'index' or settings.secondary_newsletter_banner == false %}
@@ -227,6 +255,20 @@
     <script>
       {{ settings.custom_scripts }}
     </script>
+    
+    {% include 'back-in-stock-helper' %}
+
+
+
+
+
+
+    <!-- CRITEO START -->
+    {% include 'criteo-tracking' %}
+    <!-- CRITEO END -->
+    {% include 'geolizr-notification' %}{% include 'geolizr-redirect' %}
+    
+    
   </body>
 </html>
 {% endcapture %}

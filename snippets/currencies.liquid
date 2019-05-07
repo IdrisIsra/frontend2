@@ -1,3 +1,4 @@
+
 <script type="text/javascript" src="/services/javascripts/currencies.js" data-no-instant></script>
 <script type="text/javascript" src="{{ "jquery.currencies.min.js" | asset_url }}" data-no-instant></script>
 
@@ -21,6 +22,12 @@
   } else {
     var $currencySelector = $("#mobile_menu .currencies");
   }
+  
+  $('.currencies-switcher a').click(function(){
+    var newCurrency = $(this).text();
+    Currency.convertAll(Currency.currentCurrency, newCurrency);
+    jQuery('.selected-currency').text(Currency.currentCurrency); 
+  });
   
   /* Cookie currency */
   var cookieCurrency = Currency.cookie.read();

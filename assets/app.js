@@ -177,6 +177,10 @@ $(function() {
     $('.search-terms').focus();
   });
 
+  $('body').on('click', '.icon-search.dropdown_link', function() {
+    $('.search-terms').focus();
+  });
+
   $('body').on('click', '.icon-search', function() {
     $('input.search-terms').focus();
   });
