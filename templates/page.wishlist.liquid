@@ -1,0 +1,12 @@
+<a name="pagecontent" id="pagecontent"></a>
+
+<div class="sixteen columns page clearfix">
+  <h1>
+    {{ page.title }}
+  </h1>
+  <div class="feature_divider"></div>
+
+  <div>
+    {% capture pmc_content %}{{ page.content }} <!-- include 'wishlist-collection' -->{% endcapture %}{% include 'page-multi-column', content: pmc_content %}
+  </div>
+</div>

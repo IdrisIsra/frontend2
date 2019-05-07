@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+    <!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-PLZBD6B');</script>
+	<!-- End Google Tag Manager -->
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLZBD6B"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+    
+    {{ skip_to_content_link }}
+    
+    <div class="banner" data-header>
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </div>
+
+    {{ order_summary_toggle }}
+
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main" role="main">
+          <div class="main__header">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </div>
+          <div class="main__content">
+            {{ content_for_layout }}
+          </div>
+          <div class="main__footer">
+            {{ content_for_footer }}
+          </div>
+        </div>
+        <div class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <script>
+      var shippingFirstName = document.getElementById('checkout_shipping_address_first_name');
+      if (shippingFirstName){
+        shippingFirstName.setAttribute('maxlength','20');
+      }
+      var shippingLastName = document.getElementById('checkout_shipping_address_last_name');
+      if (shippingLastName){
+        shippingLastName.setAttribute('maxlength','20');
+      }
+     
+      
+      shippingFirstName.addEventListener("change", function (e) {
+        var goodChars = "qazxswedcvfrtgbnhyujmökıolçşpğiüi̇ ";
+        console.log(this.value);
+        for (i = 0; i < this.value.length; i++) {
+          if (goodChars.includes(this.value[i].toLowerCase()) == false) {
+            alert("Lütfen İsim/Soyisim alanlarında Türkçe/İngilizce dışında karakter kullanmayınız! " + this.value[i] )
+            break
+          }
+        }
+      });
+
+      shippingLastName.addEventListener("change", function (e) {
+        var goodChars = "qazxswedcvfrtgbnhyujmökıolçşpğiüi̇ ";
+        console.log(this.value);
+        for (i = 0; i < this.value.length; i++) {
+          if (goodChars.includes(this.value[i].toLowerCase()) == false) {
+            alert("Lütfen İsim/Soyisim alanlarında Türkçe/İngilizce dışında karakter kullanmayınız! " + this.value[i] )
+            break
+          }
+        }
+      });
+      
+      
+      
+    </script>
+
+    <script>
+      var mlvedalocale="{{ shop.locale }}";
+    var mlveda_selectedcity; 			      
+	var mlveda_selectedregion; 
+      var cityjson={
+    "İSTANBUL": ["EMİNÖNÜ", "ESENLER", "ESENYURT", "EYÜP", "FATİH", "GAZİOSMANPAŞA", "GÜNGÖREN", "MERKEZ", "PENDİK", "SAMANDIRA", "SANCAKTEPE", "ÜMRANİYE", "ÜSKÜDAR", "ŞİLE", "ŞİŞLİ", "ADALAR", "ARNAVUTKÖY", "ATAŞEHİR", "AVCILAR", "BAHÇELİEVLER", "BAKIRKÖY", "BAYRAMPAŞA", "BAĞCILAR", "BAŞAKŞEHİR", "BEYKOZ", "BEYLİKDÜZÜ", "BEYOĞLU", "BEŞİKTAŞ", "BÜYÜKÇEKMECE", "KADIKÖY", "KARTAL", "KAĞITHANE", "KÜÇÜKÇEKMECE", "MALTEPE", "SARIYER", "SULTANBEYLİ", "SULTANGAZİ", "SİLİVRİ", "TUZLA", "YALOVA", "ZEYTİNBURNU", "ÇATALCA", "ÇEKMEKÖY"],
+    "IĞDIR": ["ARALIK", "KARAKOYUNLU", "TUZLUCA", "MERKEZ"],
+	"KASTAMONU": ["MERKEZ", "ÇATALZEYTİN", "İHSANGAZİ", "İNEBOLU", "ŞENPAZAR", "ABANA", "ARAÇ", "AZDAVAY", "AĞLI", "BOZKURT", "CİDE", "DADAY", "DEVREKANİ", "DOĞANYURT", "HANÖNÜ", "KÜRE", "SEYDİLER", "TAŞKÖPRÜ", "TOSYA", "PINARBAŞI"],
+	"KARAMAN": ["KAZIMKARABEKİR", "ERMENEK", "BAŞYAYLA", "AYRANCI", "MERKEZ", "SARIVELİLER"],
+	"BAYBURT": ["DEMİRÖZÜ", "AYDINTEPE", "MERKEZ"],
+	"EDİRNE": ["LALAPAŞA", "İPSALA", "HAVSA", "MERKEZ", "KEŞAN", "UZUNKÖPRÜ", "SÜLOĞLU", "ENEZ", "MERİÇ"],
+	"GİRESUN": ["PİRAZİZ", "ÇANAKÇI", "ALUCRA", "BULANCAK", "DERELİ", "DOĞANKENT", "ESPİYE", "EYNESİL", "GÖRELE", "GÜCE", "MERKEZ", "KEŞAP", "TİREBOLU", "YAĞLIDERE", "ÇAMOLUK", "ŞEBİNKARAHİSAR"],
+	"ŞIRNAK": ["SİLOPİ", "İDİL", "HABUR", "MERKEZ", "GÜÇLÜKONAK", "CİZRE", "ULUDERE", "BEYTÜŞŞEBAP"],
+	"SİVAS": ["AKINCILAR", "ALTINYAYLA", "ŞARKIŞLA", "İMRANLI", "ZARA", "YILDIZELİ", "ULAŞ", "SUŞEHRİ", "KOYULHİSAR", "KANGAL", "HAFİK", "MERKEZ", "GÜRÜN", "DOĞANŞAR", "DİVRİĞİ", "GEMEREK", "GÖLOVA"],
+	"KKTC": ["KKTC", "LEFKOŞA", "GİRNE", "GAZİMAĞUSA", "GÜZELYURT", "İSKELE"],
+	"ELAZIĞ": ["SİVRİCE", "MERKEZ", "KOVANCILAR", "KARAKOÇAN", "ALACAKAYA", "PALU", "AĞIN", "MADEN", "ARICAK", "KEBAN", "BASKİL"],
+	"BURSA": ["BÜYÜKORHAN", "İZNİK", "GÜRSU", "MUDANYA", "MUSTAFAKEMALPAŞA", "NİLÜFER", "ORHANELİ", "ORHANGAZİ", "OSMANGAZİ", "HARMANCIK", "KARACABEY", "KELES", "KESTEL", "YENİŞEHİR", "YILDIRIM", "İNEGÖL", "GEMLİK"],
+	"ŞANLIURFA": ["BOZOVA", "BİRECİK", "CEYLANPINAR", "EYYÜBİYE", "MERKEZ", "HALFETİ", "AKÇAKALE", "HARRAN", "HİLVAN", "KARAKÖPRÜ", "SURUÇ", "SİVEREK", "VİRANŞEHİR", "HALİLİYE"],
+	"KARABÜK": ["MERKEZ", "OVACıK", "SAFRANBOLU", "ESKİPAZAR", "YENİCE", "EFLANİ"],
+	"MALATYA": ["KULUNCAK", "DOĞANŞEHİR", "MERKEZ", "BATTALGAZİ", "ARAPGİR", "PÜTÜRGE ", "YAZIHAN", "HEKİMHAN", "ARGUVAN", "KALE", "DOĞANYOL", "AKÇADAĞ", "YEŞİLYURT", "DARENDE"],
+	"RİZE": ["ARDEŞEN", "DEREPAZARI", "FINDIKLI", "GÜNEYSU", "MERKEZ", "İYİDERE", "HEMŞİN", "KALKANDERE", "ÇAMLIHEMŞİN", "ÇAYELİ", "İKİZDERE", "PAZAR"],
+	"BİTLİS": ["GÜROYMAK", "MERKEZ", "MUTKİ", "AHLAT", "TATVAN", "ADİLCEVAZ", "HİZAN"],
+	"HATAY": ["YAYLADAĞI", "HASSA", "DEFNE", "MERKEZ", "BELEN", "ARSUZ", "ANTAKYA", "DÖRTYOL", "ALTINÖZÜ", "İSKENDERUN", "SAMANDAĞ", "REYHANLI", "PAYAS", "KIRIKHAN", "ERZİN", "KUMLU"],
+	"AMASYA": ["GÖYNÜCEK", "GÜMÜŞHACIKÖY", "MERKEZ", "TAŞOVA", "HAMAMÖZÜ", "SULUOVA", "MERZİFON"],
+	"ARDAHAN": ["DAMAL", "MERKEZ", "POSOF", "HANAK", "GÖLE", "ÇILDIR"],
+	"SAKARYA": ["AKYAZI", "ADAPAZARI", "ERENLER", "FERİZLİ", "GEYVE", "MERKEZ", "PAMUKOVA", "SAPANCA", "HENDEK", "KARAPÜRÇEK", "KARASU", "KAYNARCA", "KOCAALİ", "SERDİVAN", "SÖĞÜTLÜ", "TARAKLI", "XXX", "ARİFİYE"],
+	"TRABZON": ["BEŞİKDÜZÜ", "DERNEKPAZARI", "DÜZKÖY", "MERKEZ", "OF", "ORTAHİSAR", "HAYRAT", "KÖPRÜBAŞI", "MAÇKA", "SÜRMENE", "TONYA", "VAKFIKEBİR", "YOMRA", "ÇARŞIBAŞI", "ÇAYKARA", "ŞALPAZARI", "AKÇAABAT", "ARAKLI", "ARSİN"],
+	"ADANA": ["KARATAŞ", "İMAMOĞLU", "MERKEZ", "ÇUKUROVA", "ALADAĞ", "YUMURTALIK", "TUFANBEYLİ", "POZANTI", "SEYHAN", "CEYHAN", "SAİMBEYLİ", "SARIÇAM", "KOZAN", "KARAİSALI", "FEKE", "YÜREĞİR"],
+	"KOCAELİ": ["DERİNCE", "DİLOVASI", "GEBZE", "GÖLCÜK", "MERKEZ", "DARICA", "BAŞİSKELE", "İZMİT", "ÇAYIROVA", "KÖRFEZ", "KARTEPE", "KARAMÜRSEL", "KANDIRA"],
+	"SİİRT": ["AYDINLAR", "BAYKAN", "ERUH", "MERKEZ", "ŞİRVAN", "KOZLUK", "KURTALAN", "TİLLO", "PERVARİ"],
+	"AYDIN": ["BOZDOĞAN", "İNCİRLİOVA", "DİDİM", "EFELER", "GERMENCİK", "MERKEZ", "NAZİLLİ", "ORTAKLAR", "KARACASU", "KARPUZLU", "KOÇARLI", "KUYUCAK", "KUŞADASI", "KÖŞK", "SULTANHİSAR", "SÖKE", "YENİPAZAR", "ÇİNE", "BUHARKENT"],
+	"MERSİN": ["YENİŞEHİR", "TOROSLAR", "TARSUS", "SİLİFKE", "BOZYAZI", "AYDINCIK", "ANAMUR", "AKDENİZ", "MUT", "MEZİTLİ", "MERKEZ", "GÜLNAR", "ÇAMLIYAYLA", "ERDEMLİ"],
+	"TOKAT": ["ERBAA", "MERKEZ", "NİKSAR", "PAZAR", "REŞADİYE", "SULUSARAY", "BAŞÇİFTLİK", "YEŞİLYURT", "ZİLE", "ÜZÜMÖREN", "ALMUS", "ARTOVA", "TURHAL"],
+	"TEKİRDAĞ": ["ÇERKEZKÖY", "SARAY", "MURATLI", "MERKEZ", "MARMARAEREĞLİSİ", "ŞARKÖY", "ÇORLU", "KAPAKLI", "ERGENE", "SÜLEYMANPAŞA", "HAYRABOLU", "MALKARA"],
+	"VAN": ["EDREMİT", "ERCİŞ", "GEVAŞ", "GÜRPINAR", "MERKEZ", "MURADİYE", "BAŞKALE", "TUŞBA", "ÇALDIRAN", "ÇATAK", "ÖZALP", "İPEKYOLU", "BAHÇESARAY", "SARAY"],
+	"ERZİNCAN": ["OTLUKBELİ", "REFAHİYE", "ÜZÜMLÜ", "İLİÇ", "MERKEZ", "KEMAH", "KEMALİYE", "TERCAN", "ÇAYIRLI"],
+	"ESKİŞEHİR": ["İNÖNÜ", "ÇİFTELER", "BEYLİKOVA", "GÜNYÜZÜ", "MERKEZ", "MİHALGAZİ", "MİHALICÇIK", "ODUNPAZARI", "HAN", "MAHMUDİYE", "SARICAKAYA", "SEYİTGAZİ", "SİVRİHİSAR", "TEPEBAŞI", "ALPU"],
+	"KIRIKKALE": ["BALIŞEYH", "BAHŞİLİ", "SULAKYURT", "DELİCE", "MERKEZ", "KESKİN", "KARAKEÇİLİ", "YAHŞİHAN", "ÇELEBİ"],
+	"BOLU": ["DÖRTDİVAN", "GEREDE", "GÖYNÜK", "MENGEN", "YENİÇAĞA", "MUDURNU", "KIBRISCIK", "SEBEN", "MERKEZ"],
+	"MARDİN": ["DERİK", "NUSAYBİN", "SAVUR", "MAZIDAĞI", "MERKEZ", "DARGEÇİT", "MİDYAT", "ÖMERLİ", "KIZILTEPE", "ARTUKLU", "YEŞİLLİ"],
+	"MUŞ": ["HASKÖY", "KORKUT", "MALAZGİRT", "BULANIK", "MERKEZ", "VARTO"],
+	"BATMAN": ["SASON", "KOZLUK", "HASANKEYF", "MERKEZ", "GERCÜŞ", "BEŞİRİ"],
+	"YALOVA": ["ÇİFTLİKKÖY", "ÇINARCIK", "TERMAL", "ARMUTLU", "MERKEZ", "ALTINOVA"],
+	"DİYARBAKIR": ["MERKEZ", "EĞİL", "ERGANİ", "DİCLE", "BİSMİL", "BAĞLAR", "ÇÜNGÜŞ", "ÇINAR", "ÇERMİK", "YENİŞEHİR", "SİLVAN", "SUR", "LİCE", "KULP", "KOCAKÖY", "KAYAPINAR", "HAZRO", "HANİ"],
+	"ERZURUM": ["PALANDÖKEN", "ÇAT", "PAZARYOLU", "İSPİR", "ŞENKAYA", "AZİZİYE", "AŞKALE", "MERKEZ", "NARMAN", "OLTU", "OLUR", "HINIS", "HORASAN", "ILICA", "KARAYAZI", "KARAÇOBAN", "KÖPRÜKÖY", "TEKMAN", "TORTUM", "UZUNDERE", "YAKUTİYE", "PASİNLER"],
+	"NEVŞEHİR": ["AVANOS", "DERİNKUYU", "GÜLŞEHİR", "ACIGÖL", "MERKEZ", "KOZAKLI", "ÜRGÜP", "HACIBEKTAŞ"],
+	"KÜTAHYA": ["EMET", "DUMLUPINAR", "GEDİZ", "DOMANİÇ", "ASLANAPA", "ALTINTAŞ", "ŞAPHANE", "ÇAVDARHİSAR", "TAVŞANLI", "SİMAV", "HİSARCIK", "PAZARLAR", "MERKEZ"],
+	"AĞRI": ["DOĞUBAYAZIT", "DİYADİN", "ELEŞKİRT", "MERKEZ", "PATNOS", "HAMUR", "TAŞLIÇAY", "TUTAK"],
+	"ARTVİN": ["ARDANUÇ", "ARHAVİ", "BORÇKA", "ŞAVŞAT", "MURGUL", "HOPA", "YUSUFELİ", "MERKEZ"],
+	"UŞAK": ["EŞME", "MERKEZ", "BANAZ", "SİVASLI", "ULUBEY", "KARAHALLI"],
+	"SAMSUN": ["ALAÇAM", "19 MAYIS", "ATAKUM", "AYVACIK", "BAFRA", "CANİK", "MERKEZ", "SALIPAZARI", "HAVZA", "KAVAK", "LADİK", "TEKKEKÖY", "TERME", "VEZİRKÖPRÜ", "YAKAKENT", "ÇARŞAMBA", "İLKADIM", "ASARCIK"],
+	"AFYON": ["EMİRDAĞ", "HOCALAR", "DAZKIRI", "BOLVADİN", "SULTANDAĞI", "SİNANPAŞA", "SİNCANLI", "SANDIKLI", "BAŞMAKÇI", "İHSANİYE", "BAYAT", "ŞUHUT", "ÇAY", "İSCEHİSAR", "KIZILÖREN", "EVCİLER", "MERKEZ", "ÇOBANLAR", "DİNAR"],
+	"AKSARAY": ["ESKİL", "GÜLAĞAÇ", "GÜZELYURT", "AĞAÇÖREN", "ORTAKÖY", "SARIYAHŞİ", "MERKEZ"],
+	"NİĞDE": ["ALTUNHİSAR", "BOR", "ÇİFTLİK", "ULUKIŞLA", "ÇAMARDI", "MERKEZ"],
+	"TUNCELİ": ["MERKEZ", "NAZIMİYE", "OVACIK", "ÇEMİŞGEZEK", "PÜLÜMÜR", "HOZAT", "MAZGİRT", "PERTEK"],
+	"ANTALYA": ["AKSEKİ", "İBRADI", "ALANYA", "DEMRE", "DÖŞEMEALTI", "ELMALI", "FİNİKE", "GAZİPAŞA", "GÜNDOĞMUŞ", "MERKEZ", "MURATPAŞA", "KAŞ", "KEMER", "KEPEZ", "KONYAALTI", "KORKUTELİ", "KUMLUCA", "MANAVGAT", "SERİK", "AKSU"],
+	"OSMANİYE": ["HASANBEYLİ", "KADİRLİ", "MERKEZ", "DÜZİÇİ", "BAHÇE", "TOPRAKKALE", "SUMBAS"],
+	"KARS": ["DİGOR", "MERKEZ", "AKYAKA", "SUSUZ", "KAĞIZMAN", "SARIKAMIŞ", "SELİM", "ARPAÇAY"],
+	"ÇANAKKALE": ["BAYRAMİÇ", "BOZCAADA", "BİGA", "ECEABAT", "EZİNE", "AYVACIK", "GÖKÇEADA", "MERKEZ", "LAPSEKİ", "YENİCE", "ÇAN", "GELİBOLU"],
+	"ZONGULDAK": ["DEVREK", "EREĞLİ", "GÖKÇEBEY", "MERKEZ", "ALAPLI", "KİLİMLİ", "ÇAMOLUK", "ÇAYCUMA", "KOZLU"],
+	"ORDU": ["AKKUŞ", "İKİZCE", "AYBASTI", "FATSA", "GÖLKÖY", "GÜLYALI", "GÜRGENTEPE", "MERKEZ", "MESUDİYE", "PERŞEMBE", "KABADÜZ", "KABATAŞ", "KORGAN", "KUMRU", "ULUBEY", "ÇAMAŞ", "ÇATALPINAR", "ÇAYBAŞI", "ÜNYE", "ALTINORDU"],
+	"DENİZLİ": ["MERKEZEFENDİ", "AKKÖY", "KALE", "ÇAMELİ", "MERKEZ", "GÜNEY", "ÇAL", "TAVAS", "BABADAĞ", "BAKLAN", "SERİNHİSAR", "ÇİVRİL", "BEKİLLİ", "BEYAĞAÇ", "BOZKURT", "BULDAN", "PAMUKKALE", "ÇARDAK", "SARAYKÖY", "ACIPAYAM", "HONAZ"],
+	"MUĞLA": ["ULA", "SEYDİKEMER", "MARMARİS", "KÖYCEĞİZ", "KAVAKLIDERE", "ORTACA", "MİLAS", "MERKEZ", "FETHİYE", "MENTEŞE", "DATÇA", "DALAMAN", "BODRUM", "YATAĞAN", "XXX"],
+	"GÜMÜŞHANE": ["ŞİRAN", "MERKEZ", "TORUL", "KÖSE", "KÜRTÜN", "KELKİT"],
+	"MANİSA": ["SALİHLİ", "MERKEZ", "GÖRDES", "ALAŞEHİR", "AKHİSAR", "AHMETLİ", "ŞEHZADELER", "DEMİRCİ", "YUNUSEMRE", "TURGUTLU", "SOMA", "SELENDİ", "SARUHANLI", "SARIGÖL", "KÖPRÜBAŞI", "GÖLMARMARA", "KIRKAĞAÇ", "KULA"],
+	"ÇORUM": ["BAYAT", "BOĞAZKALE", "DODURGA", "MECİTÖZÜ", "MERKEZ", "ORTAKÖY", "ALACA", "OĞUZLAR", "KARGI", "LAÇİN", "SUNGURLU", "UĞURLUDAĞ", "İSKİLİP", "OSMANCIK"],
+	"ANKARA": ["PURSAKLAR", "ÇUBUK", "AKYURT", "ALTINDAĞ", "AYAŞ", "BALA", "BEYPAZARI", "ELMADAĞ", "ETİMESGUT", "EVREN", "GÖLBAŞI", "GÜDÜL", "MERKEZ", "NALLIHAN", "POLATLI", "HAYMANA", "KAHRAMANKAZAN", "KALECİK", "KEÇİÖREN", "KIZILCAHAMAM", "MAMAK", "SİNCAN", "YENİMAHALLE", "ÇAMLIDERE", "ÇANKAYA", "ŞEREFLİKOÇHİSAR"],
+	"BARTIN": ["AMASRA", "ULUS", "MERKEZ", "KURUCAŞİLE"],
+	"YOZGAT": ["BOĞAZLIYAN", "MERKEZ", "KADIŞEHRİ", "SARAYKENT", "SARIKAYA", "SORGUN", "AYDINCIK", "YERKÖY", "ÇANDIR", "ÇAYIRALAN", "ÇEKEREK", "ŞEFAATLİ", "AKDAĞMADENİ", "YENİFAKILI"],
+	"HAKKARİ": ["ÇUKURCA", "MERKEZ", "ŞEMDİNLİ", "YÜKSEKOVA"],
+	"KONYA": ["HADİM", "HALKAPINAR", "HALKAPINAR", "HÜYÜK", "ILGIN", "KADINHANI", "KARAPINAR", "KARATAY", "KULU", "SARAYÖNÜ", "SELÇUKLU", "SEYDİŞEHİR", "TAŞKENT", "TUZLUKÇU", "YALIHÜYÜK", "YUNAK", "ÇELTİK", "ÇUMRA", "AHIRLI", "AKÖREN", "AKŞEHİR", "ALTINEKİN", "BEYŞEHİR", "BOZKIR", "CİHANBEYLİ", "DERBENT", "DEREBUCAK", "DOĞANHİSAR", "EMİRGAZİ", "EREĞLİ", "GÜNEYSINIR", "MERAM", "MERKEZ"],
+	"DÜZCE": ["AKÇAKOCA", "GÖLYAKA", "ÇİLİMLİ", "YIĞILCA", "GÜMÜŞOVA", "CUMAYERİ", "KAYNAŞLI", "MERKEZ"],
+	"BALIKESİR": ["BURHANİYE", "BANDIRMA", "DURSUNBEY", "EDREMİT", "ERDEK", "GÖMEÇ", "GÖNEN", "MERKEZ", "HAVRAN", "KARESİ", "KEPSUT", "MANYAS", "MARMARA", "SAVAŞTEPE", "SINDIRGI", "SUSURLUK", "İVRİNDİ", "AKÇAY", "ALTIEYLÜL", "AYVALIK", "BALYA", "BİGADİÇ"],
+	"BİLECİK": ["BOZÜYÜK", "GÖLPAZARI", "MERKEZ", "İNHİSAR", "PAZARYERİ", "SÖĞÜT", "YENİPAZAR", "OSMANELİ"],
+	"KAYSERİ": ["FELAHİYE", "YEŞİLHİSAR", "MELİKGAZİ", "MERKEZ", "PINARBAŞI", "ÖZVATAN", "İNCESU", "AKKIŞLA", "BÜNYAN", "DEVELİ", "KOCASİNAN", "SARIOĞLAN", "SARIZ", "TALAS", "TOMARZA", "YAHYALI", "HACILAR"],
+	"BİNGÖL": ["GENÇ", "MERKEZ", "KARLIOVA", "ADAKLI", "SOLHAN", "YAYLADERE", "YEDİSU", "KİĞI"],
+	"SİNOP": ["SARAYDÜZÜ", "AYANCIK", "BOYABAT", "DURAĞAN", "DİKMEN", "ERFELEK", "GERZE", "MERKEZ", "TÜRKELİ"],
+	"ÇANKIRI": ["BAYRAMÖREN", "ELDİVAN", "ESKİPAZAR", "MERKEZ", "ORTA", "OVACIK", "ILGAZ", "KIZILIRMAK", "KORGUN", "KURŞUNLU", "YAPRAKLI", "ÇERKEŞ", "ŞABANÖZÜ", "ATKARACALAR"],
+	"BURDUR": ["BUCAK", "GÖLHİSAR", "MERKEZ", "KARAMANLI", "KEMER", "AĞLASUN", "YEŞİLOVA", "ÇAVDIR", "ÇELTİKÇİ", "ALTINYAYLA", "TEFENNİ"],
+	"ISPARTA": ["GELENDOST", "YALVAÇ", "ATABEY", "KEÇİBORLU", "AKSU", "GÖNEN", "ULUBORLU", "SENİRKENT", "SÜTÇÜLER", "MERKEZ", "ŞARKİKARAAĞAÇ", "EĞİRDİR", "YENİŞARBADEMLİ"],
+	"KİLİS": ["POLATELİ", "MERKEZ", "ELBEYLİ", "MUSABEYLİ"],
+	"GAZİANTEP": ["OĞUZELİ", "İSLAHİYE", "ŞAHİNBEY", "ŞEHİTKAMİL", "YAVUZELİ", "MERKEZ", "NURDAĞI", "NİZİP", "KARKAMIŞ", "ARABAN"],
+	"KIRŞEHİR": ["BOZTEPE", "MERKEZ", "MUCUR", "AKÇAKENT", "AKPINAR", "KAMAN", "ÇİÇEKDAĞI"],
+	"ADIYAMAN": ["MERKEZ", "GÖLBAŞI", "GERGER", "BESNİ", "SAMSAT", "ÇELİKHAN", "TUT", "SİNCİK", "KAHTA"],
+	"KAHRAMANMARAŞ": ["EKİNÖZÜ", "ELBİSTAN", "GÖKSUN", "MERKEZ", "NURHAK", "PAZARCIK", "TÜRKOĞLU", "ÇAĞLAYANCERİT", "12 ŞUBAT", "AFŞİN", "ANDIRIN", "DULKADİROĞLU"],
+	"KIRKLARELİ": ["MERKEZ", "PEHLİVANKÖY", "PINARHİSAR", "VİZE", "DEMİRKÖY", "KOFÇAZ", "LÜLEBURGAZ", "BABAESKİ"],
+	"İZMİR": ["DİKİLİ", "ÇEŞME", "GAZİEMİR", "GÜZELBAHÇE", "MENDERES", "MENEMEN", "MERKEZ", "NARLIDERE", "ÇİĞLİ", "ÖDEMİŞ", "ALİAĞA", "BALÇOVA", "BAYINDIR", "BAYRAKLI", "BERGAMA", "BEYDAĞ", "BORNOVA", "BUCA", "KARABAĞLAR", "KARABURUN", "KARŞIYAKA", "KEMALPAŞA", "KINIK", "KONAK", "KİRAZ", "SEFERİHİSAR", "SELÇUK", "TORBALI", "TİRE", "URLA", "XXX", "FOÇA"]
+};
+     
+      function setcity(){
+        
+        var mlveda_cityvalue=document.getElementById("checkout_shipping_address_city").value;
+        console.log("city"+mlveda_cityvalue);
+        var mlveda_regionemptyoption;
+        if(mlvedalocale=="tr"){
+          mlveda_regionemptyoption="<option>-- Lütfen seçiniz İlçe --</option>";
+        }
+        else{
+          mlveda_regionemptyoption="<option>-- Please Select Region --</option>";
+        }
+        document.getElementById("checkout_shipping_address_address2").innerHTML="null";
+        if(mlveda_cityvalue==""){
+              $('.mlveda-region').append(mlveda_regionemptyoption);
+                  }
+        else{
+        var mlvedaregion=[];
+        mlvedaregion=cityjson[mlveda_cityvalue];
+        mlvedaregion.sort();
+        //mlveda_regionkeys.sort();
+        
+        var mlveda_regionoption=null;
+       
+       
+         $('.mlveda-region').append(mlveda_regionemptyoption);
+        for(i=0;i<mlvedaregion.length;i++){
+         mlveda_regionoption="<option  value='"+mlvedaregion[i]+"'>"+mlvedaregion[i]+"</option>";
+           $('.mlveda-region').append(mlveda_regionoption);
+          	
+        }
+        if(mlveda_selectedregion!="" ){ 			
+          document.getElementById("checkout_shipping_address_address2").value=mlveda_selectedregion; 			
+		       }
+        }
+      
+       $("label[for='checkout_shipping_address_address2']").parent().addClass('field__input-wrapper--select');
+        $("label[for='checkout_shipping_address_address2']").parent().parent().addClass('field--show-floating-label');
+      }
+      
+      function getRegion(){
+      	var mlveda_country=document.getElementById("checkout_shipping_address_country").value;
+      	
+	  	document.querySelector("label[for='checkout_shipping_address_address2']").innerHTML='Apt, suite, etc. (optional)';
+      	//$("label.mlveda_city").remove();
+        $("select.mlveda-city").remove();
+     	$("select.mlveda-region").remove();
+        $("label[for='checkout_shipping_address_address2']").parent().removeClass('field__input-wrapper--select');
+        $("label[for='checkout_shipping_address_city']").parent().removeClass('field__input-wrapper--select');
+        
+        document.getElementById("checkout_shipping_address_city").style.display="inline";
+        document.getElementById("checkout_shipping_address_address2").style.display="inline";
+        document.getElementById("checkout_shipping_address_address2").name="checkout[shipping_address][address2]";
+       	
+        document.getElementById("checkout_shipping_address_city").name="checkout[shipping_address][city]";
+        //document.getElementById("checkout_shipping_address_city").style.display = "none";
+        
+        console.log(document.getElementById("checkout_shipping_address_address2").required);
+        
+      if(mlveda_country==='Turkey'  ||  mlveda_country==='Türkiye' ||  mlveda_country==='TÜRKİYE'){
+        var mlveda_region;
+        var mlveda_city;
+        if(mlvedalocale=="tr"){
+          document.querySelector("label[for='checkout_shipping_address_address2']").innerHTML='İlçe';
+        document.querySelector("label[for='checkout_shipping_address_city']").innerHTML='İl';
+        mlveda_region="<select size='1' class='field__input field__input--select mlveda-region'  data-backup='address2'   name='checkout[shipping_address][address2]' id='checkout_shipping_address_address2'><option value=''>-- Lütfen seçiniz İlçe --</option></select>";
+        mlveda_city="<select size='1' class='field__input field__input--select mlveda-city'  data-backup='city'   name='checkout[shipping_address][city]' id='checkout_shipping_address_city'><option value=''>-- Seçiniz İl --</option></select>";
+        }
+        else{
+		document.querySelector("label[for='checkout_shipping_address_address2']").innerHTML='Region';
+        document.querySelector("label[for='checkout_shipping_address_city']").innerHTML='City';
+        mlveda_region="<select size='1' class='field__input field__input--select mlveda-region'  data-backup='address2'   name='checkout[shipping_address][address2]' id='checkout_shipping_address_address2'><option value=''>-- Please Select Region --</option></select>";
+        mlveda_city="<select size='1' class='field__input field__input--select mlveda-city'  data-backup='city'   name='checkout[shipping_address][city]' id='checkout_shipping_address_city'><option value=''>-- Select City --</option></select>";
+        }
+          document.getElementById("checkout_shipping_address_address2").name="address2";
+        document.getElementById("checkout_shipping_address_address2").style.display = "none";
+        
+        
+        $("label[for='checkout_shipping_address_address2']").after(mlveda_region);
+        
+        //document.getElementById("checkout_shipping_address_address2").disabled=true;
+   
+        
+        document.getElementById("checkout_shipping_address_city").name="city";
+        document.getElementById("checkout_shipping_address_city").style.display = "none";
+        
+        
+        $("label[for='checkout_shipping_address_city']").after(mlveda_city);
+        
+        
+        //var mlveda_regionkeys= Object.keys(regionjson);
+        var mlveda_citykeys= Object.keys(cityjson);
+      //  mlveda_citykeys.sort();
+        //mlveda_regionkeys.sort();
+        var mlveda_option=null;
+        for(i=0;i<mlveda_citykeys.length;i++){
+         mlveda_option="<option  value='"+mlveda_citykeys[i]+"'>"+mlveda_citykeys[i]+"</option>";
+           $('.mlveda-city').append(mlveda_option);
+          	
+        }
+        if(mlveda_selectedcity!=""){ 			
+	        			
+	        document.getElementById("checkout_shipping_address_city").value=mlveda_selectedcity; 			
+		        setcity();   			
+		        } 
+        //$("label[for='checkout_shipping_address_city']").parent().parent().addClass('field--show-floating-label');
+        $("label[for='checkout_shipping_address_city']").parent().addClass('field__input-wrapper--select');
+        $("label[for='checkout_shipping_address_city']").parent().parent().addClass('field--show-floating-label');
+        $("label[for='checkout_shipping_address_address2']").parent().addClass('field__input-wrapper--select');
+        $("label[for='checkout_shipping_address_address2']").parent().parent().addClass('field--show-floating-label');
+            
+       
+        document.getElementById("checkout_shipping_address_city").onchange=function(){
+        mlveda_selectedregion="";
+         setcity();
+        }
+      }
+      }
+      $(document).ready(function(){
+        if(document.getElementById("checkout_shipping_address_address2")!=null){
+          mlveda_selectedcity=document.getElementById("checkout_shipping_address_city").value; 			
+		  mlveda_selectedregion=document.getElementById("checkout_shipping_address_address2").value;
+         getRegion();
+          
+         document.querySelector(".step__footer__continue-btn").onclick=function(){
+           if(document.getElementById("checkout_shipping_address_country").value==='Turkey'){
+         //    alert(document.getElementById("checkout_shipping_address_address2").value);
+        
+       if(document.getElementById("checkout_shipping_address_address2").value=="-- Lütfen seçiniz İlçe --"  ){
+        var mlvedaerror='<p class="field__message field__message--error" id="error-for-address2 ">Lütfen seçiniz İlçe</p>';
+        $('[data-address-field="address2"]').append(mlvedaerror); 
+         $('.mlveda-region').parent().addClass('field--error');       
+       //console.log(mlvedaerror);   
+        return false;
+        }
+             
+             else if(document.getElementById("checkout_shipping_address_address2").value=="-- Please Select Region --"){
+        var mlvedaerror='<p class="field__message field__message--error" id="error-for-address2">Please Select Region</p>';
+        console.log(mlvedaerror);       
+       $('[data-address-field="address2"]').append(mlvedaerror); 
+               $('.mlveda-region').parent().addClass('field--error'); 
+          return false;   
+      }
+             
+           
+            }   } ;
+                                
+      
+      document.getElementById("checkout_shipping_address_country").onchange=function(){getRegion();};
+       
+        }    
+      });//ends here
+      
+    </script>
+    <script>
+      $(document).ready(function(){
+	  	//$(".section.section--shipping-address #checkout_shipping_address_address2").attr("placeholder", "Region");
+	  //	$(".section.section--shipping-address #checkout_shipping_address_city").appendTo( $(".section.section--shipping-address").find("[data-address-field='address1']") );
+      //  $(".section.section--shipping-address #checkout_shipping_address_address1").appendTo( $(".section.section--shipping-address").find("[data-address-field='city']") );
+      //  $("#error-for-city").appendTo( $(".section.section--shipping-address").find("[data-address-field='address1']") );
+       // $("#error-for-address1").appendTo( $(".section.section--shipping-address").find("[data-address-field='city']") );
+
+
+      
+		
+      });
+      $(window).scroll(function(){
+        if($(window).width() < 748){
+          if($(window).scrollTop() > 300){
+              $('.step__footer__continue-btn.btn').addClass('fixed-button');
+          } else {
+              $('.step__footer__continue-btn.btn').removeClass('fixed-button');
+          }
+        }	
+      });
+    </script>
+    <style>
+      @media (min-width: 750px) {
+      .floating-labels .field--two-thirds ,.floating-labels .field--third{
+        width: 50% !important;
+       }
+      }
+      
+        
+      .fieldset {
+  display: -moz-box;                
+        display: -webkit-box;             
+        display: box; 
+     -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+      
+     .floating-labels div[data-address-field="first_name"] {
+	-webkit-box-ordinal-group: 1;
+	-moz-box-ordinal-group: 1;
+	box-ordinal-group: 1;
+width: 100% !important;
+}
+.floating-labels div[data-address-field="last_name"] {
+	-webkit-box-ordinal-group: 2;
+		-moz-box-ordinal-group: 2;
+	box-ordinal-group: 2;
+width: 100% !important;
+}
+.floating-labels div[data-address-field="address1"] {
+	-webkit-box-ordinal-group: 3;
+		-moz-box-ordinal-group: 3;
+	box-ordinal-group: 3;
+	width: 100% !important;
+}
+.floating-labels div[data-address-field="city"] {
+		-webkit-box-ordinal-group: 4!important;
+		-moz-box-ordinal-group: 4!important;
+	box-ordinal-group: 4!important;
+	width: 100% !important;
+}
+.floating-labels div[data-address-field="address2"] {
+
+  
+  -webkit-box-ordinal-group: 5;
+		-moz-box-ordinal-group: 5;
+	box-ordinal-group: 5;
+	width: 100% !important;
+}
+.floating-labels div[data-address-field="province"] {
+	-webkit-box-ordinal-group: 6;
+		-moz-box-ordinal-group: 6;
+	box-ordinal-group: 6;
+	width: 100% !important;
+}
+.floating-labels div[data-address-field="country"] {
+	-webkit-box-ordinal-group: 7;
+		-moz-box-ordinal-group: 7;
+	box-ordinal-group: 7;
+	width: 100% !important;
+}
+.floating-labels div[data-address-field="zip"] {
+	-webkit-box-ordinal-group: 8;
+		-moz-box-ordinal-group: 8;
+	box-ordinal-group: 8;
+	width: 100% !important;
+}
+      
+   .floating-labels div[data-address-field="phone"] {
+	-webkit-box-ordinal-group: 9;
+		-moz-box-ordinal-group: 9;
+	box-ordinal-group: 9;
+	width: 100% !important;
+}
+      
+      
+    
+      
+    </style>
+<script type="text/javascript">
+       
+  
+  
+  
+   {% assign shipcode = checkout.shipping_address.country_code %}
+              {% unless shipcode == "TR" %}
+  jQuery("[data-select-gateway='137911172']").remove();
+  jQuery("[data-subfields-for-gateway='137911172']").remove();
+  jQuery("[data-select-gateway='137911172']").remove();
+  jQuery("[data-subfields-for-gateway='137911172']").remove();
+              {% endunless %}
+    
+    
+      
+              {% unless shipcode == "BH" or shipcode =="JO" or shipcode =="KW" or shipcode =="LB" or shipcode =="OM" or shipcode =="QA" or shipcode =="SA" or shipcode =="AE" %}
+  $("[data-select-gateway='202997764']").remove();
+  jQuery("[data-subfields-for-gateway='202997764']").remove();
+  jQuery("[data-select-gateway='202997764']").remove();
+  jQuery("[data-subfields-for-gateway='202997764']").remove();
+              {% endunless %}
+  
+</script>
+    
+  </body>
+</html>

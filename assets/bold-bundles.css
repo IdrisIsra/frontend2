@@ -1,0 +1,277 @@
+/*
+------------------------------------  WARNING  ------------------------------------
+This file will be overwritten and should not be edited directly.
+In order to edit custom CSS for Bold Product Bundles you should:
+- Log into your Shopify Admin Panel
+- Go to Apps --> Installed --> Product Bundles
+- Go to Display Settings
+------------------------------------  WARNING  ------------------------------------
+bold-bundles.css version 1
+Generated at 2017-11-03 10:40:31
+*/
+
+/* .bold-bundles-product component */
+
+.bold-bundles-product {
+  width: 100%;
+}
+
+/* .bold-bundles-widget component */
+
+.bold-bundles-widget {
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c0c0c0;
+  padding: 20px;
+  cursor: default;
+  margin: 20px 0;
+}
+
+.bold-bundles-widget::before,
+.bold-bundles-widget::after {
+  background-repeat: no-repeat;
+  box-sizing: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+}
+
+.bold-bundles-widget__items {
+  justify-content: center;
+}
+
+@media screen and (min-width: 650px) {
+  .bold-bundles-widget__items {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
+
+.bold-bundles-widget__footer {
+  padding-top: 15px;
+}
+
+/* .bold-bundles-widget-header component */
+
+.bold-bundles-widget-header {
+
+}
+
+.bold-bundles-widget-header__title {
+  font-size: 18px;
+  color: #383838;
+}
+
+
+/* .bold-bundles-widget-item component */
+
+.bold-bundles-widget-item {
+  flex: 1 1 50px;
+  display: block;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.bold-bundles-widget-item--with-separator {
+  text-align: center;
+}
+
+@media screen and (min-width: 650px) {
+  .bold-bundles-widget-item.bold-bundles-widget-item--product {
+    min-width: 125px;
+    width: calc(50% - 26px);
+    max-width: calc(50% - 26px);
+    padding-right: 5px;
+    padding-bottom: 0px;
+  }
+
+  .bold-bundles-widget-item.bold-bundles-widget-item--with-separator {
+    max-width: 26px;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .bold-bundles-widget__items .bold-bundles-widget-item--product:first-child:nth-last-child(6),
+  .bold-bundles-widget__items .bold-bundles-widget-item--product:first-child:nth-last-child(6) ~ .bold-bundles-widget-item--product {
+    width: calc(33% - 26px);
+    max-width: calc(33% - 26px);
+  }
+
+  .bold-bundles-widget__items .bold-bundles-widget-item--product:first-child:nth-last-child(8),
+  .bold-bundles-widget__items .bold-bundles-widget-item--product:first-child:nth-last-child(8) ~ .bold-bundles-widget-item--product {
+    width: calc(25% - 26px);
+    max-width: calc(25% - 26px);
+  }
+
+  /* Try to get a row of 3 and a row of 2 */
+  .bold-bundles-widget__items .bold-bundles-widget-item--product:first-child:nth-last-child(10),
+  .bold-bundles-widget__items .bold-bundles-widget-item--product:first-child:nth-last-child(10) ~ .bold-bundles-widget-item--product {
+    width: calc(33% - 26px);
+    max-width: calc(33% - 26px);
+  }
+}
+
+.bold-bundles-widget-item__wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.bold-bundles-widget-item__thumbnail {
+  flex: auto;
+  width: 25%;
+}
+
+/* IE as issues with vertical-align with no height style */
+@media screen and (min-width: 650px) {
+  .bold-bundles-widget-item__thumbnail {
+    margin-bottom: 15px;
+    vertical-align: bottom;
+    min-height: 1px;
+    width: 100%;
+  }
+}
+.bold-bundles-widget-item__link {
+  max-width: 50%;
+}
+
+@media screen and (min-width: 650px) {
+  .bold-bundles-widget-item__image {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .bold-bundles-widget-item__link {
+    min-width: 100%;
+  }
+}
+
+.bold-bundles-widget-item__info {
+  padding-left: 10px;
+  min-width: 200px;
+  width: 75%;
+  flex: auto;
+}
+
+@media screen and (min-width: 650px) {
+  .bold-bundles-widget-item__info {
+    width: 100%;
+    min-width: 0px;
+  }
+}
+
+.bold-bundles-widget-item__title {
+  font-size: 16px;
+  color: #383838;
+}
+
+.bold-bundles-widget-item__variants {
+  display: block;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.bold-bundles-widget-item__price {
+  font-size: 14px;
+  color: #606060;
+}
+
+.bold-bundles-widget-item__price--old {
+  opacity: 0.75;
+  text-decoration: line-through;
+}
+
+.bold-bundles-widget-item__price--new {
+  font-weight: 600;
+}
+
+/* .bold-bundles-widget-item-separator component */
+
+.bold-bundles-widget-item-separator__wrapper {
+  border-bottom: 1px solid #c0c0c0;
+  margin-bottom: 20px;
+}
+
+.bold-bundles-widget-item-separator {
+  background-color: #333333;
+  border-radius: 50%;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  bottom: -18px;
+}
+
+.bold-bundles-widget-item--with-separator:nth-child(n+1):last-child {
+  display: none;
+}
+
+
+.bold-bundles-widget-item-separator__icon {
+  display: block;
+  fill: #FFFFFF;
+  margin: 0 auto;
+  position: relative;
+  top: 4px;
+  height: 12px;
+  width: 12px;
+}
+
+@media screen and (min-width: 650px) {
+  .bold-bundles-widget-item-separator__wrapper {
+    border-bottom: none;
+    margin-bottom: 0px;
+  }
+}
+
+/* bold-bundles-widget__button--top */
+
+.bold-bundles-widget__button {
+    border: 1px solid transparent;
+  border-radius: 2px;
+      -webkit-appearance: button;
+  display: inline-block;
+}
+
+
+
+.bold-bundles-widget__button--top {
+  display: block;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+}
+
+.bold-bundles-widget__button--bottom {
+  display: block;
+  padding: 2px 5px 0 5px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(255, 255,255, 0.1);
+}
+
+/* .bold-bundles-child-product component */
+
+.bold-bundles-child-product-info{
+  padding-bottom:15px;
+}
+
+.bold-bundles-child-product__title{
+  font-size:large;
+  opacity: 0.7;
+  padding-bottom: 10px;
+}
+
+.bold-bundles-child-product__variant-wrapper{
+  padding-bottom:15px;
+}
+
+.bold-bundles-child-product__link-wrapper{
+  padding-bottom:5px;
+}
+
+
+

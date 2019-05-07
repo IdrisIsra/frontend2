@@ -1,0 +1,16 @@
+@media only screen and (max-width: 747px) { 
+  .content {
+  	padding-bottom: 80px;
+  }
+  
+  .step__footer__continue-btn.btn.fixed-button {
+    position: fixed;
+    left: 3%;
+    bottom: 0;
+    width: 94%;
+  }
+}
+
+.total-recap__original-price {
+	display: none;
+}
